@@ -14,7 +14,7 @@ public class MasonryInterop : IMasonryInterop
         _jsRuntime = jSRuntime;
     }
 
-    public ValueTask Init(string selector = ".div", bool percentPosition = true, float transitionDurationSecs = .2F)
+    public ValueTask Init(string selector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F)
     {
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
