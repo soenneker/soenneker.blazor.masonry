@@ -14,10 +14,10 @@ public class MasonryInterop : IMasonryInterop
         _jsRuntime = jSRuntime;
     }
 
-    public ValueTask Init(string selector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F)
+    public ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F)
     {
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        return _jsRuntime.InvokeVoidAsync("initMasonry", selector, percentPosition, transitionDurationStr);
+        return _jsRuntime.InvokeVoidAsync("initMasonry", containerSelector, itemSelector, percentPosition, transitionDurationStr);
     }
 }

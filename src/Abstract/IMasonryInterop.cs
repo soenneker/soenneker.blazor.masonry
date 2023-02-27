@@ -5,10 +5,11 @@ namespace Soenneker.Blazor.Masonry.Abstract;
 /// <summary>
 /// A small Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
 /// </summary>
-public interface IMasonryInterop 
+public interface IMasonryInterop
 {
     /// <summary>
-    /// Initialize Masonry within your Razor code in the `OnAfterRenderAsync` override
+    /// Initialize Masonry within your Razor code in the `OnAfterRenderAsync` override. <para/>
+    /// Defaults to bootstrap selectors (.container for container, and .row for itemSelector)
     /// </summary>
-    ValueTask Init(string selector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F);
+    ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F);
 }
