@@ -58,7 +58,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack --no-build --configuration Release --output .
+        run: dotnet pack --no-build --configuration Release
 
       - name: Publish to nuGet
         run: dotnet nuget push **\*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
