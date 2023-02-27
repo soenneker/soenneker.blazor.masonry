@@ -1,5 +1,5 @@
 ﻿window.initMasonry = (selector, percentPosition, transitionDuration) => {
-    document.querySelector(selector).masonry({
+    var masonry = new Masonry(selector, {
         percentPosition: percentPosition,
         transitionDuration: transitionDuration
     });
