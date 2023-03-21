@@ -38,7 +38,7 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\"/>
 
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-        <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
     </ItemGroup>
 </Project>
