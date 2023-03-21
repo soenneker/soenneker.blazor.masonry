@@ -1,5 +1,5 @@
 [![](https://img.shields.io/nuget/v/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
-[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.masonry/main.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.masonry/actions/workflows/main.yml)
+[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.masonry/publish.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.masonry/actions/workflows/publish.yml)
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
 
 # Soenneker.Blazor.Masonry
