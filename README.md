@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.masonry/publish.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.masonry/actions/workflows/publish.yml)
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
 
-# Soenneker.Blazor.Masonry
+# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Blazor.Masonry
 ### A small Blazor interop library that integrates [Masonry](https://masonry.desandro.com/), the cascading grid layout library
 
 ## Installation
