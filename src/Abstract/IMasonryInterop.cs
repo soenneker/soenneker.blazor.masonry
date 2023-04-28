@@ -3,7 +3,7 @@
 namespace Soenneker.Blazor.Masonry.Abstract;
 
 /// <summary>
-/// A small Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
+/// A Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
 /// </summary>
 public interface IMasonryInterop
 {

@@ -2,10 +2,10 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Blazor.Masonry.Abstract;
 
-namespace Soenneker.Blazor.Masonry.Extensions;
+namespace Soenneker.Blazor.Masonry.Registrars;
 
 /// <summary>
-/// A small Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
+/// A Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
 /// </summary>
 public static class MasonryRegistrar
 {
