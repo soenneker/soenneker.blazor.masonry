@@ -1,0 +1,31 @@
+name: Re-enable automerge
+on:
+  pull_request:
+    branches: [main]
+    types:
+      - auto_merge_disabled
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  GH_TOKEN: ${{ secrets.DEPENDABOT }}
+
+jobs:
+  main:
+    if: "github.event.reason == 'Base branch was modified'"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update pull request branch
+      run: gh api -X PUT "repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/update-branch"
+      shell: bash
+
+    # This prevents pull request from being merged before running a new workflow.
+    - name: wait for starting a new workflow by updating branch
+      shell: bash
+      run: sleep 10
+
+    - name: enable automerge
+      shell: bash
+      run: gh pr merge --auto --merge "$PR_URL"
