@@ -9,7 +9,7 @@
 
     <PropertyGroup>
         <Description>A small Blazor interop library that integrates Masonry, the cascading grid layout library</Description>
-        <Version Condition="'$(BUILD_VERSION)' == ''">2.0.0</Version>
+        <Version Condition="'$(BUILD_VERSION)' == ''">2.1.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Blazor.Masonry</AssemblyName>
         <PackageId>Soenneker.Blazor.Masonry</PackageId>
