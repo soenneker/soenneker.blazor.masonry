@@ -1,4 +1,4 @@
-name: Re-enable automerge
+name: reenable-automerge
 on:
   pull_request:
     branches: [main]
@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  main:
+  reenable-automerge:
     if: "github.event.reason == 'Base branch was modified'"
     runs-on: ubuntu-latest
     steps:

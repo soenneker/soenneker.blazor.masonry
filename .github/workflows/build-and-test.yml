@@ -1,4 +1,4 @@
-name: Build and Test
+name: build-and-test
 on:
   # Testing - run for any PRs.
   pull_request:
@@ -6,8 +6,6 @@ on:
       - main
 
 jobs:
-
-  # Build, test and publish (if this is a push/merge).
   build-and-test:
     runs-on: ubuntu-latest
   
