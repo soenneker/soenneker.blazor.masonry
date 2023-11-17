@@ -19,6 +19,6 @@ jobs:
           PR_URL: ${{github.event.pull_request.html_url}}
 
       - name: Approve patch and minor updates
-        run: gh pr review $PR_URL --approve -b "I'm **approving** this pull request"
+        run: gh pr review $PR_URL --approve
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
