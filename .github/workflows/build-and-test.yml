@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+    "PipelineEnvironment": true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest

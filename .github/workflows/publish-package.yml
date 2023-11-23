@@ -8,6 +8,9 @@ on:
     tags:
       - v*
 
+env:
+    "PipelineEnvironment": true
+
 jobs:
   publish-package:
     runs-on: ubuntu-latest
