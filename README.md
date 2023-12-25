@@ -8,7 +8,7 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Blazor.Masonry
+dotnet add package Soenneker.Blazor.Masonry
 ```
 
 ## Usage
