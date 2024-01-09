@@ -38,6 +38,6 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
         
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
     </ItemGroup>
 </Project>
