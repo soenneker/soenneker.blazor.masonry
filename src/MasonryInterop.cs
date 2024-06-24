@@ -27,8 +27,8 @@ public class MasonryInterop : IMasonryInterop
 
         _initialized = true;
 
-        await _moduleImportUtil.Import("Soenneker.Blazor.Masonry/js/masonry.js", cancellationToken);
-        await _moduleImportUtil.WaitUntilLoaded("Soenneker.Blazor.Masonry/js/masonry.js", cancellationToken);
+        await _moduleImportUtil.Import("Soenneker.Blazor.Masonry/js/masonryinterop.js", cancellationToken);
+        await _moduleImportUtil.WaitUntilLoaded("Soenneker.Blazor.Masonry/js/masonryinterop.js", cancellationToken);
     }
 
     public async ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F, CancellationToken cancellationToken = default)
@@ -37,6 +37,6 @@ public class MasonryInterop : IMasonryInterop
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync("initMasonry", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
+        await _jsRuntime.InvokeVoidAsync("MasonryInitializer.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
     }
 }
