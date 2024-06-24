@@ -38,6 +38,7 @@ public static async Task Main(string[] args)
 ```csharp
 protected override async Task OnAfterRenderAsync(bool firstRender)
 {
-    await MasonryInterop.Init();
+	if (firstRender)
+		await MasonryInterop.Init();
 }
 ```
