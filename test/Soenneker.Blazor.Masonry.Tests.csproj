@@ -17,8 +17,8 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Utils.Test" Version="2.1.232" />
-        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.832" />
+        <PackageReference Include="Soenneker.Utils.Test" Version="2.1.235" />
+        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.849" />
     </ItemGroup>
 
   <ItemGroup>
