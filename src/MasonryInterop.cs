@@ -39,4 +39,9 @@ public class MasonryInterop : IMasonryInterop
 
         await _jsRuntime.InvokeVoidAsync("MasonryInitializer.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
     }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _moduleImportUtil.DisposeModule("Soenneker.Blazor.Masonry/js/masonryinterop.js");
+    }
 }

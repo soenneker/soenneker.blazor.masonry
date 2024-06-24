@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Soenneker.Blazor.Masonry.Abstract;
@@ -6,7 +7,7 @@ namespace Soenneker.Blazor.Masonry.Abstract;
 /// <summary>
 /// A Blazor interop library that integrates Masonry (https://masonry.desandro.com), the cascading grid layout library
 /// </summary>
-public interface IMasonryInterop
+public interface IMasonryInterop : IAsyncDisposable
 {
     /// <summary>
     /// Initialize Masonry within your Razor code in the `OnAfterRenderAsync` override. <para/>
