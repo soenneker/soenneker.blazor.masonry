@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Description>A small Blazor interop library that integrates Masonry, the cascading grid layout library</Description>
+        <Description>A Blazor interop library that integrates Masonry, the cascading grid layout library</Description>
         <Version Condition="'$(BUILD_VERSION)' == ''">2.1.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Blazor.Masonry</AssemblyName>
@@ -37,7 +37,8 @@
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ModuleImport" Version="2.1.3" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="2.1.5" />
     </ItemGroup>
 </Project>

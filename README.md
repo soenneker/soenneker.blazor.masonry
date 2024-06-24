@@ -13,14 +13,7 @@ dotnet add package Soenneker.Blazor.Masonry
 
 ## Usage
 
-1. Insert the interop script, and the library script in `wwwroot/index.html` at the bottom of your `<body>`
-
-```html
-<script src="_content/Soenneker.Blazor.Masonry/masonry.js"></script>
-<script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
-```
-
-2. Register the interop within DI (`Program.cs`)
+1. Register the interop within DI (`Program.cs`)
 
 ```csharp
 public static async Task Main(string[] args)
@@ -30,7 +23,7 @@ public static async Task Main(string[] args)
 }
 ```
 
-3. Inject `IMasonryInterop` within your `App.Razor` file
+2. Inject `IMasonryInterop` within your `App.Razor` file
 
 
 ```csharp
@@ -38,10 +31,9 @@ public static async Task Main(string[] args)
 @inject IMasonryInterop MasonryInterop
 ```
 
+3. Use [Bootstrap Rows](https://getbootstrap.com/docs/5.0/examples/masonry/) and columns on the page (`<div class='row'></div>`). Other selectors can be passed into the interop, `.row` is default.
 
-4. Use [Bootstrap Rows](https://getbootstrap.com/docs/5.0/examples/masonry/) and columns on the page (`<div class='row'></div>`). Other selectors can be passed into the interop, `.row` is default.
-
-5. Initialize Masonry within your Razor code in the `OnAfterRenderAsync` override
+4. Initialize Masonry within your Razor code in the `OnAfterRenderAsync` override
 
 ```csharp
 protected override async Task OnAfterRenderAsync(bool firstRender)
