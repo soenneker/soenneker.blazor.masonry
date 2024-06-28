@@ -38,7 +38,7 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
-        <PackageReference Include="Soenneker.Blazor.Utils.ModuleImport" Version="2.1.8" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ModuleImport" Version="2.1.9" />
         <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="2.1.7" />
     </ItemGroup>
 </Project>
