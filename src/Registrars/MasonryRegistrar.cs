@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Blazor.Masonry.Abstract;
-using Soenneker.Blazor.Utils.ModuleImport.Registrars;
+using Soenneker.Blazor.Utils.ResourceLoader.Registrars;
 
 namespace Soenneker.Blazor.Masonry.Registrars;
 
@@ -15,7 +15,7 @@ public static class MasonryRegistrar
     /// </summary>
     public static void AddMasonry(this IServiceCollection services)
     {
-        services.AddModuleImportUtil();
+        services.AddResourceLoader();
         services.TryAddScoped<IMasonryInterop, MasonryInterop>();
     }
 }

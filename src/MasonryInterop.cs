@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.Masonry.Abstract;
-using Soenneker.Blazor.Utils.ModuleImport.Abstract;
+using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
 using Soenneker.Extensions.ValueTask;
 using Soenneker.Utils.AsyncSingleton;
 
@@ -12,22 +12,22 @@ namespace Soenneker.Blazor.Masonry;
 public class MasonryInterop : IMasonryInterop
 {
     private readonly IJSRuntime _jsRuntime;
-    private readonly IModuleImportUtil _moduleImportUtil;
+    private readonly IResourceLoader _resourceLoader;
 
     private readonly AsyncSingleton<object> _scriptInitializer;
 
-    public MasonryInterop(IJSRuntime jSRuntime, IModuleImportUtil moduleImportUtil)
+    public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
         _jsRuntime = jSRuntime;
-        _moduleImportUtil = moduleImportUtil;
+        _resourceLoader = resourceLoader;
 
         _scriptInitializer = new AsyncSingleton<object>(async objects => {
 
             var cancellationToken = (CancellationToken)objects[0];
 
-            await _moduleImportUtil.Import("Soenneker.Blazor.Masonry/masonryinterop.js", cancellationToken);
-            await _moduleImportUtil.WaitUntilLoadedAndAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInitializer", 100, cancellationToken);
-
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInitializer", 100, cancellationToken).NoSync();
+            await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken).NoSync();
+        
             return new object();
         });
     }
@@ -43,6 +43,6 @@ public class MasonryInterop : IMasonryInterop
 
     public ValueTask DisposeAsync()
     {
-        return _moduleImportUtil.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js");
+        return _resourceLoader.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js");
     }
 }
