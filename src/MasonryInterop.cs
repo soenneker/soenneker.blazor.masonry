@@ -24,7 +24,7 @@ public class MasonryInterop : IMasonryInterop
         _scriptInitializer = new AsyncSingleton<object>(async (token, _) => {
 
             await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInterop", 100, token).NoSync();
-            await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken).NoSync();
+            await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", token).NoSync();
         
             return new object();
         });
