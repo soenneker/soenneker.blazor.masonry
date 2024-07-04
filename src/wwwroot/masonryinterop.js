@@ -1,4 +1,4 @@
-﻿export class MasonryInitializer {
+﻿export class MasonryInterop {
     static async init(containerSelector, itemSelector, percentPosition, transitionDuration) {       
         const masonry = new Masonry(containerSelector, {
             itemSelector: itemSelector,
@@ -8,4 +8,4 @@
     }
 }
 
-window.MasonryInitializer = MasonryInitializer;
+window.MasonryInterop = MasonryInterop;

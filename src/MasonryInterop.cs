@@ -21,11 +21,9 @@ public class MasonryInterop : IMasonryInterop
         _jsRuntime = jSRuntime;
         _resourceLoader = resourceLoader;
 
-        _scriptInitializer = new AsyncSingleton<object>(async objects => {
+        _scriptInitializer = new AsyncSingleton<object>(async (token, _) => {
 
-            var cancellationToken = (CancellationToken)objects[0];
-
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInitializer", 100, cancellationToken).NoSync();
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInterop", 100, token).NoSync();
             await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken).NoSync();
         
             return new object();
@@ -38,7 +36,7 @@ public class MasonryInterop : IMasonryInterop
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInitializer.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
+        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
     }
 
     public ValueTask DisposeAsync()
