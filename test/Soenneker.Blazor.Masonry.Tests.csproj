@@ -18,7 +18,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Soenneker.Utils.Test" Version="2.1.240" />
-        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.974" />
+        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.976" />
     </ItemGroup>
 
   <ItemGroup>
