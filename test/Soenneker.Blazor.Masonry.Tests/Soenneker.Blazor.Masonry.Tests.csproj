@@ -22,7 +22,7 @@
     </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Soenneker.Blazor.Masonry.csproj" />
+    <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry.csproj" />
   </ItemGroup>
 
 </Project>
