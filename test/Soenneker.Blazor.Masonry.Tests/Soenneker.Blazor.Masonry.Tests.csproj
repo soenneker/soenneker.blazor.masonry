@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
       <Nullable>enable</Nullable>
       <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
@@ -17,8 +22,8 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Utils.Test" Version="2.1.243" />
-        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.1059" />
+        <PackageReference Include="Soenneker.Utils.Test" Version="2.1.244" />
+        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="2.1.1075" />
     </ItemGroup>
 
   <ItemGroup>
