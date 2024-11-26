@@ -13,9 +13,11 @@ public static class MasonryRegistrar
     /// <summary>
     /// Shorthand for <code>services.TryAddScoped</code>
     /// </summary>
-    public static void AddMasonry(this IServiceCollection services)
+    public static IServiceCollection AddMasonry(this IServiceCollection services)
     {
         services.AddResourceLoader();
         services.TryAddScoped<IMasonryInterop, MasonryInterop>();
+
+        return services;
     }
 }
