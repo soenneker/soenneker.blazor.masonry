@@ -37,6 +37,6 @@
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.635" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.637" />
     </ItemGroup>
 </Project>
