@@ -23,8 +23,8 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Soenneker.Utils.Test" Version="3.0.253" />
-        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="3.0.1348" />
-    </ItemGroup>
+        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="3.0.1358" />
+    <PackageReference Include="xUnit.v3" Version="1.0.0" /></ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry.csproj" />
