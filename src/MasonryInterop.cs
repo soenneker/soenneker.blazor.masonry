@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.Masonry.Abstract;
@@ -41,6 +42,8 @@ public class MasonryInterop : IMasonryInterop
 
     public ValueTask DisposeAsync()
     {
+        GC.SuppressFinalize(this);
+
         return _resourceLoader.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js");
     }
 }
