@@ -12,7 +12,7 @@ public static class MasonryRegistrar
 {
     public static IServiceCollection AddMasonryInteropAsScoped(this IServiceCollection services)
     {
-        services.AddResourceLoader();
+        services.AddResourceLoaderAsScoped();
         services.TryAddScoped<IMasonryInterop, MasonryInterop>();
 
         return services;
