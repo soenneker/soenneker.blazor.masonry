@@ -10,10 +10,7 @@ namespace Soenneker.Blazor.Masonry.Registrars;
 /// </summary>
 public static class MasonryRegistrar
 {
-    /// <summary>
-    /// Shorthand for <code>services.TryAddScoped</code>
-    /// </summary>
-    public static IServiceCollection AddMasonry(this IServiceCollection services)
+    public static IServiceCollection AddMasonryInteropAsScoped(this IServiceCollection services)
     {
         services.AddResourceLoader();
         services.TryAddScoped<IMasonryInterop, MasonryInterop>();

@@ -19,7 +19,7 @@ dotnet add package Soenneker.Blazor.Masonry
 public static async Task Main(string[] args)
 {
     ...
-    builder.Services.AddMasonry();
+    builder.Services.AddMasonryInteropAsScoped();
 }
 ```
 
