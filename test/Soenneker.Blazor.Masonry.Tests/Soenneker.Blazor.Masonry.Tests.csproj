@@ -27,7 +27,7 @@
         <PackageReference Include="Soenneker.Utils.Test" Version="3.0.267" />
         <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="3.0.1626" />
         <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="3.0.152" />
-        <PackageReference Include="xUnit.v3" Version="1.0.1" />
+        <PackageReference Include="xUnit.v3" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>
