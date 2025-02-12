@@ -15,14 +15,14 @@ public class MasonryInterop : IMasonryInterop
     private readonly IJSRuntime _jsRuntime;
     private readonly IResourceLoader _resourceLoader;
 
-    private readonly AsyncSingleton<object> _scriptInitializer;
+    private readonly AsyncSingleton _scriptInitializer;
 
     public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
         _jsRuntime = jSRuntime;
         _resourceLoader = resourceLoader;
 
-        _scriptInitializer = new AsyncSingleton<object>(async (token, _) => {
+        _scriptInitializer = new AsyncSingleton(async (token, _) => {
 
             await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInterop", 100, token).NoSync();
             await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken: token).NoSync();
@@ -33,17 +33,19 @@ public class MasonryInterop : IMasonryInterop
 
     public async ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F, CancellationToken cancellationToken = default)
     {
-        await _scriptInitializer.Get(cancellationToken).NoSync();
+        await _scriptInitializer.Init(cancellationToken).NoSync();
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr);
+        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr).NoSync();
     }
 
-    public ValueTask DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         GC.SuppressFinalize(this);
 
-        return _resourceLoader.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js");
+        await _resourceLoader.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js").NoSync();
+
+        await _scriptInitializer.DisposeAsync().NoSync();
     }
 }
