@@ -17,34 +17,60 @@ public class MasonryInterop : IMasonryInterop
 
     private readonly AsyncSingleton _scriptInitializer;
 
+    private const string _modulePath = "Soenneker.Blazor.Masonry/js/masonryinterop.js";
+
     public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
         _jsRuntime = jSRuntime;
         _resourceLoader = resourceLoader;
 
-        _scriptInitializer = new AsyncSingleton(async (token, _) => {
+        _scriptInitializer = new AsyncSingleton(async (token, obj) =>
+        {
+            var useCdn = true;
 
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.Masonry/masonryinterop.js", "MasonryInterop", 100, token).NoSync();
-            await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry","sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken: token).NoSync();
-        
+            if (obj.Length > 0)
+                useCdn = (bool) obj[0];
+
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, "MasonryInterop", 100, token).NoSync();
+
+            if (useCdn)
+            {
+                await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry",
+                                         "sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken: token)
+                                     .NoSync();
+            }
+            else
+            {
+                await _resourceLoader
+                      .LoadScriptAndWaitForVariable("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js", "Masonry", cancellationToken: token)
+                      .NoSync();
+            }
+
             return new object();
         });
     }
 
-    public async ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true, float transitionDurationSecs = .2F, CancellationToken cancellationToken = default)
+    public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        await _scriptInitializer.Init(cancellationToken).NoSync();
+        await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
+    }
+
+    public async ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
+        float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
+    {
+        await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr).NoSync();
+        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr)
+                        .NoSync();
     }
 
     public async ValueTask DisposeAsync()
     {
         GC.SuppressFinalize(this);
 
-        await _resourceLoader.DisposeModule("Soenneker.Blazor.Masonry/masonryinterop.js").NoSync();
+        await _resourceLoader.DisposeModule(_modulePath).NoSync();
 
         await _scriptInitializer.DisposeAsync().NoSync();
     }

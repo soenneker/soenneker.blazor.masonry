@@ -42,3 +42,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 		await MasonryInterop.Init();
 }
 ```
+
+### To pre-warm the lazy script loading:
+
+```csharp
+await MasonryInterop.Warmup();
+```
