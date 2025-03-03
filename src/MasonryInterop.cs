@@ -18,6 +18,7 @@ public class MasonryInterop : IMasonryInterop
     private readonly AsyncSingleton _scriptInitializer;
 
     private const string _modulePath = "Soenneker.Blazor.Masonry/js/masonryinterop.js";
+    private const string _moduleNamespace = "MasonryInterop";
 
     public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
@@ -29,9 +30,9 @@ public class MasonryInterop : IMasonryInterop
             var useCdn = true;
 
             if (obj.Length > 0)
-                useCdn = (bool) obj[0];
+                useCdn = (bool)obj[0];
 
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, "MasonryInterop", 100, token).NoSync();
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleNamespace, 100, token).NoSync();
 
             if (useCdn)
             {
@@ -55,15 +56,25 @@ public class MasonryInterop : IMasonryInterop
         await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
     }
 
-    public async ValueTask Init(string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
+    public async ValueTask Init(string id, string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
     {
         await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, containerSelector, itemSelector, percentPosition, transitionDurationStr)
+        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.init", cancellationToken, id, containerSelector, itemSelector, percentPosition, transitionDurationStr)
                         .NoSync();
+    }
+
+    public async ValueTask Layout(string id, CancellationToken cancellationToken = default)
+    {
+        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.layout", cancellationToken, id).NoSync();
+    }
+
+    public async ValueTask Destroy(string id, CancellationToken cancellationToken = default)
+    {
+        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.destroy", cancellationToken, id).NoSync();
     }
 
     public async ValueTask DisposeAsync()
