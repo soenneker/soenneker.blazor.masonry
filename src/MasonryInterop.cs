@@ -51,9 +51,9 @@ public class MasonryInterop : IMasonryInterop
         });
     }
 
-    public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
+    public ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
+        return _scriptInitializer.Init(cancellationToken, useCdn);
     }
 
     public async ValueTask Init(string id, string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
@@ -69,12 +69,14 @@ public class MasonryInterop : IMasonryInterop
 
     public async ValueTask Layout(string id, CancellationToken cancellationToken = default)
     {
-        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.layout", cancellationToken, id).NoSync();
+        await _scriptInitializer.Init(cancellationToken).NoSync();
+
+        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.layout", cancellationToken, id);
     }
 
-    public async ValueTask Destroy(string id, CancellationToken cancellationToken = default)
+    public ValueTask Destroy(string id, CancellationToken cancellationToken = default)
     {
-        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.destroy", cancellationToken, id).NoSync();
+         return _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.destroy", cancellationToken, id);
     }
 
     public async ValueTask DisposeAsync()
