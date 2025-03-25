@@ -32,8 +32,6 @@ public class MasonryInterop : IMasonryInterop
             if (obj.Length > 0)
                 useCdn = (bool)obj[0];
 
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleNamespace, 100, token).NoSync();
-
             if (useCdn)
             {
                 await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry",
@@ -46,6 +44,8 @@ public class MasonryInterop : IMasonryInterop
                       .LoadScriptAndWaitForVariable("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js", "Masonry", cancellationToken: token)
                       .NoSync();
             }
+
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleNamespace, 100, token).NoSync();
 
             return new object();
         });
