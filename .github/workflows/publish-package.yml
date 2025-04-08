@@ -1,8 +1,10 @@
-name: publish-package
+﻿name: publish-package
 on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'test/**'
 
     tags:
       - v*
