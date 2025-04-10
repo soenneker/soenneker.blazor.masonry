@@ -1,0 +1,70 @@
+@using System.Threading
+@using Soenneker.Blazor.Masonry.Abstract
+@using Soenneker.Extensions.Task
+@using Soenneker.Extensions.ValueTask
+@using Soenneker.Extensions.String
+
+@inject IMasonryInterop MasonryInterop
+
+@implements IMasonry
+
+<div id="@_elementId" @attributes="Attributes">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object?>? Attributes { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool AutoRender { get; set; } = true;
+
+    private string _elementId = null!;
+
+    private readonly CancellationTokenSource _cTs = new();
+
+    protected override void OnParametersSet()
+    {
+        if (Attributes != null && Attributes.TryGetValue("id", out object? idValue) && idValue is string idStr && idStr.HasContent())
+        {
+            _elementId = idStr;
+        }
+        else
+        {
+            _elementId = $"masonry-{Guid.NewGuid()}";
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && AutoRender)
+        {
+            await MasonryInterop.Init(_elementId, cancellationToken: _cTs.Token).NoSync();
+            await MasonryInterop.CreateObserver(_elementId, _cTs.Token).NoSync();
+        }
+    }
+
+    public async ValueTask Init(CancellationToken cancellationToken = default)
+    {
+        using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cTs.Token);
+        await MasonryInterop.Init(_elementId, cancellationToken: linkedCts.Token).NoSync();
+        await MasonryInterop.CreateObserver(_elementId, linkedCts.Token).NoSync();
+    }
+
+    public async ValueTask Layout(CancellationToken cancellationToken = default)
+    {
+        using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cTs.Token);
+        await MasonryInterop.Layout(_elementId, cancellationToken: linkedCts.Token).NoSync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        GC.SuppressFinalize(this);
+
+        await MasonryInterop.Destroy(_elementId).NoSync();
+        await _cTs.CancelAsync().NoSync();
+    }
+}

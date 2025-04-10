@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+      <TargetFramework>net9.0</TargetFramework>
+      <Nullable>enable</Nullable>
+      <Platforms>AnyCPU</Platforms>
+      <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+      <PackageReference Include="Blazorise.Bootstrap" Version="1.7.5" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.4" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.4" PrivateAssets="all" />
+      <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="3.0.134" />
+      <PackageReference Include="Soenneker.Utils.AutoBogus" Version="3.0.750" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry.csproj" />
+  </ItemGroup>
+
+</Project>

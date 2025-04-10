@@ -18,7 +18,7 @@ public class MasonryInterop : IMasonryInterop
     private readonly AsyncSingleton _scriptInitializer;
 
     private const string _modulePath = "Soenneker.Blazor.Masonry/js/masonryinterop.js";
-    private const string _moduleNamespace = "MasonryInterop";
+    private const string _moduleName = "MasonryInterop";
 
     public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
@@ -45,7 +45,7 @@ public class MasonryInterop : IMasonryInterop
                       .NoSync();
             }
 
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleNamespace, 100, token).NoSync();
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleName, 100, token).NoSync();
 
             return new object();
         });
@@ -56,27 +56,34 @@ public class MasonryInterop : IMasonryInterop
         return _scriptInitializer.Init(cancellationToken, useCdn);
     }
 
-    public async ValueTask Init(string id, string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
+    public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
     {
         await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
 
+        containerSelector ??= $"#{elementId}";
+
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.init", cancellationToken, id, containerSelector, itemSelector, percentPosition, transitionDurationStr)
+        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.init", cancellationToken, elementId, containerSelector, itemSelector, percentPosition, transitionDurationStr)
                         .NoSync();
     }
 
-    public async ValueTask Layout(string id, CancellationToken cancellationToken = default)
+    public ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default)
+    {
+        return _jsRuntime.InvokeVoidAsync($"{_moduleName}.createObserver", cancellationToken, elementId);
+    }
+
+    public async ValueTask Layout(string elementId, CancellationToken cancellationToken = default)
     {
         await _scriptInitializer.Init(cancellationToken).NoSync();
 
-        await _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.layout", cancellationToken, id);
+        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.layout", cancellationToken, elementId);
     }
 
-    public ValueTask Destroy(string id, CancellationToken cancellationToken = default)
+    public ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)
     {
-         return _jsRuntime.InvokeVoidAsync($"{_moduleNamespace}.destroy", cancellationToken, id);
+         return _jsRuntime.InvokeVoidAsync($"{_moduleName}.destroy", cancellationToken, elementId);
     }
 
     public async ValueTask DisposeAsync()

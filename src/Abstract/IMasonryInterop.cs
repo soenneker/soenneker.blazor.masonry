@@ -16,19 +16,20 @@ public interface IMasonryInterop : IAsyncDisposable
 
     /// <summary>
     /// Initializes a Masonry instance. This should be called in the `OnAfterRenderAsync` override. <para/>
-    /// Defaults to Bootstrap selectors (.container for container, and .row for itemSelector). <para/>
-    /// Each instance requires a unique <paramref name="id"/> to avoid conflicts.
+    /// Each instance requires a unique <paramref name="elementId"/> to avoid conflicts.
     /// </summary>
-    ValueTask Init(string id, string containerSelector = ".container", string itemSelector = ".row", bool percentPosition = true,
+    public ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default);
+
+    ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Triggers a layout update for an existing Masonry instance.
     /// </summary>
-    ValueTask Layout(string id, CancellationToken cancellationToken = default);
+    ValueTask Layout(string elementId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Destroys a Masonry instance and removes it from memory.
     /// </summary>
-    ValueTask Destroy(string id, CancellationToken cancellationToken = default);
+    ValueTask Destroy(string elementId, CancellationToken cancellationToken = default);
 }

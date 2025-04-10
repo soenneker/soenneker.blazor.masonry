@@ -1,0 +1,53 @@
+﻿@page "/second"
+@using Soenneker.Blazor.Masonry.Demo.Dtos
+@using Soenneker.Blazor.Masonry.Demo.Utils
+
+<img src="https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png" />
+<h1>Soenneker.Blazor.Masonry demo</h1>
+<p>This page demonstrates some of the uses of the Masonry component.</p>
+<div>Note: Masonry initialization is delayed due to images</div>
+
+<NavLink href="/">Go to index page</NavLink>
+
+<div>
+    <div class="container">
+        <Masonry AutoRender="false" @ref="_masonry" class="row">
+            @foreach (CardModel card in _cards)
+            {
+                <MasonryItem class="col-sm-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="@card.ImageUrl" class="card-img-top" alt="@card.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@card.Title</h5>
+                            <p class="card-text">@card.Text</p>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </MasonryItem>
+            }
+        </Masonry>
+    </div>
+</div>
+
+<hr />
+
+@code {
+    private List<CardModel> _cards = [];
+
+    private Masonry _masonry = null!;
+
+    protected override void OnInitialized()
+    {
+        _cards = CardsUtil.GetCards();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Task.Delay(3000); // images
+            await _masonry.Init();
+        }
+    }
+
+}

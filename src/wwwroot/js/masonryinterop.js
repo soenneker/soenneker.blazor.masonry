@@ -1,7 +1,10 @@
 ﻿export class MasonryInterop {
-    static instances = new Map();
+    constructor() {
+        this.instances = new Map();
+        this.observer = null;
+    }
 
-    static init(id, containerSelector, itemSelector, percentPosition = true, transitionDuration = 300) {
+    init(id, containerSelector, itemSelector, percentPosition = true, transitionDuration = 300) {
         try {
             if (this.instances.has(id)) {
                 console.warn(`Masonry instance with id '${id}' already exists.`);
@@ -20,7 +23,7 @@
         }
     }
 
-    static layout(id) {
+    layout(id) {
         const masonry = this.instances.get(id);
         if (masonry) {
             masonry.layout();
@@ -29,7 +32,7 @@
         }
     }
 
-    static destroy(id) {
+    destroy(id) {
         const masonry = this.instances.get(id);
         if (masonry) {
             masonry.destroy();
@@ -38,6 +41,27 @@
             console.warn(`Masonry instance with id '${id}' not found or already destroyed.`);
         }
     }
+
+    createObserver(elementId) {
+        const target = document.getElementById(elementId);
+        if (!target || !target.parentNode) {
+            console.warn(`Element with id '${elementId}' not found or has no parent.`);
+            return;
+        }
+
+        this.observer = new MutationObserver((mutations) => {
+            const targetRemoved = mutations.some(mutation => Array.from(mutation.removedNodes).includes(target));
+
+            if (targetRemoved) {
+                this.destroy(elementId);
+
+                this.observer.disconnect();
+                this.observer = null;
+            }
+        });
+
+        this.observer.observe(target.parentNode, { childList: true });
+    }
 }
 
-window.MasonryInterop = MasonryInterop;
+window.MasonryInterop = new MasonryInterop();
