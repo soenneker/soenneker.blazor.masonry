@@ -1,0 +1,32 @@
+<div @attributes="MergedAttributes" >
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object?>? Attributes { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private IReadOnlyDictionary<string, object?> MergedAttributes =>
+        MergeAttributesWithClass(Attributes, "masonry-sizer");
+
+    private static IReadOnlyDictionary<string, object?> MergeAttributesWithClass(Dictionary<string, object?>? attributes, string additionalClass)
+    {
+        var merged = new Dictionary<string, object?>(attributes ?? new Dictionary<string, object?>());
+
+        if (merged.TryGetValue("class", out object? existingClassObj) && existingClassObj is string existingClass)
+        {
+            merged["class"] = $"{existingClass} {additionalClass}";
+        }
+        else
+        {
+            merged["class"] = additionalClass;
+        }
+
+        return merged;
+    }
+
+}

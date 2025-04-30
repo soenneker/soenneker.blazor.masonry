@@ -56,7 +56,7 @@ public class MasonryInterop : IMasonryInterop
         return _scriptInitializer.Init(cancellationToken, useCdn);
     }
 
-    public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", bool percentPosition = true,
+    public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string columnWidthSelector = ".masonry-sizer", bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
     {
         await _scriptInitializer.Init(cancellationToken, useCdn).NoSync();
@@ -65,7 +65,7 @@ public class MasonryInterop : IMasonryInterop
 
         var transitionDurationStr = $"{transitionDurationSecs}s";
 
-        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.init", cancellationToken, elementId, containerSelector, itemSelector, percentPosition, transitionDurationStr)
+        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.init", cancellationToken, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition, transitionDurationStr)
                         .NoSync();
     }
 

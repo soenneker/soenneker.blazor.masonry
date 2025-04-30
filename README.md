@@ -59,10 +59,23 @@ Automatically appends `masonry-item` to the `class` attribute.
 
 ---
 
+### `MasonrySizer`
+
+Optionally specify width of a single column.
+
+```razor
+<MasonrySizer class="col-sm-1" />
+```
+
+Automatically appends `masonry-sizer` to the `class` attribute.
+
+---
+
 ## 🚀 Example
 
 ```razor
 <Masonry AutoRender="false" @ref="_masonry" class="row">
+    <MasonrySizer class="col-sm-1" />
     @foreach (var card in _cards)
     {
         <MasonryItem class="col-lg-4 col-md-6 mb-4">
@@ -133,6 +146,7 @@ await MasonryInterop.Init(
     elementId: "gallery",
     containerSelector: "#gallery",
     itemSelector: ".masonry-item",
+    columnWidthSelector: ".masonry-sizer",
     percentPosition: true,
     transitionDurationSecs: 0.25f,
     useCdn: true
