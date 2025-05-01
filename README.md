@@ -44,6 +44,7 @@ Wraps a group of items in a Masonry layout.
 **Parameters:**
 
 - `AutoRender` – Automatically initializes layout after render
+- `SizerClass` – Automatically adds a sizer with the given class(es). Used by Masonry to determine width of a single column.
 
 ### `MasonryItem`
 
@@ -59,23 +60,10 @@ Automatically appends `masonry-item` to the `class` attribute.
 
 ---
 
-### `MasonrySizer`
-
-Optionally specify width of a single column.
-
-```razor
-<MasonrySizer class="col-sm-1" />
-```
-
-Automatically appends `masonry-sizer` to the `class` attribute.
-
----
-
 ## 🚀 Example
 
 ```razor
-<Masonry AutoRender="false" @ref="_masonry" class="row">
-    <MasonrySizer class="col-sm-1" />
+<Masonry AutoRender="false" SizerClass="col-sm-1" @ref="_masonry" class="row">
     @foreach (var card in _cards)
     {
         <MasonryItem class="col-lg-4 col-md-6 mb-4">

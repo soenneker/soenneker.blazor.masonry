@@ -11,8 +11,7 @@
 
 <div >
     <div class="container" >
-        <Masonry AutoRender="false" @ref="_masonry" class="row">
-            <MasonrySizer class="col-sm-1" />
+        <Masonry AutoRender="false" SizerClass="col-sm-1" @ref="_masonry" class="row">
             @foreach (CardModel card in _cards)
             {
                 <MasonryItem class="col-sm-6 col-lg-4 mb-4" >

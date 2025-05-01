@@ -9,6 +9,10 @@
 @implements IMasonry
 
 <div id="@_elementId" @attributes="Attributes">
+    @if (HasSizer)
+    {
+        <div class="@($"{_sizerSelectorClass} {SizerClass}".Trim())"></div>
+    }
     @ChildContent
 </div>
 
@@ -22,9 +26,16 @@
     [Parameter]
     public bool AutoRender { get; set; } = true;
 
+    [Parameter]
+    public string? SizerClass { get; set; }
+
     private string _elementId = null!;
 
+    private readonly string _sizerSelectorClass = "masonry-sizer";
     private readonly CancellationTokenSource _cTs = new();
+
+    string SizerSelector => "." + _sizerSelectorClass;
+    bool HasSizer => !string.IsNullOrEmpty(SizerClass);
 
     protected override void OnParametersSet()
     {
@@ -42,7 +53,7 @@
     {
         if (firstRender && AutoRender)
         {
-            await MasonryInterop.Init(_elementId, cancellationToken: _cTs.Token).NoSync();
+            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: _cTs.Token).NoSync();
             await MasonryInterop.CreateObserver(_elementId, _cTs.Token).NoSync();
         }
     }
@@ -50,7 +61,7 @@
     public async ValueTask Init(CancellationToken cancellationToken = default)
     {
         using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cTs.Token);
-        await MasonryInterop.Init(_elementId, cancellationToken: linkedCts.Token).NoSync();
+        await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linkedCts.Token).NoSync();
         await MasonryInterop.CreateObserver(_elementId, linkedCts.Token).NoSync();
     }
 
