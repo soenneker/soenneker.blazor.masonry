@@ -4,7 +4,7 @@
         this.observer = null;
     }
 
-    init(id, containerSelector, itemSelector, percentPosition = true, transitionDuration = 300) {
+    init(id, containerSelector, itemSelector, columnWidthSelector, percentPosition = true, transitionDuration = 300) {
         try {
             if (this.instances.has(id)) {
                 console.warn(`Masonry instance with id '${id}' already exists.`);
@@ -13,6 +13,7 @@
 
             const masonry = new Masonry(containerSelector, {
                 itemSelector: itemSelector,
+                columnWidth: columnWidthSelector,
                 percentPosition: percentPosition,
                 transitionDuration: transitionDuration
             });
