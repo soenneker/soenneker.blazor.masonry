@@ -1,4 +1,4 @@
-﻿name: 🐛 Bug Report
+name: 🐛 Bug Report
 description: Report a problem
 title: "[Bug]: "
 labels: [bug]
@@ -28,6 +28,7 @@ body:
       label: Environment
       description: .NET version, library version, OS, runtime
       placeholder: ".NET 8, Windows 11, library v1.2.3"
+      required: false
 
   - type: textarea
     id: logs
@@ -35,3 +36,4 @@ body:
       label: Stack trace or error
       description: Paste any logs or exceptions
       render: shell
+      required: false
