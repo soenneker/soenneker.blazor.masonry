@@ -18,7 +18,7 @@ public interface IMasonryInterop : IAsyncDisposable
     /// Initializes a Masonry instance. This should be called in the `OnAfterRenderAsync` override. <para/>
     /// Each instance requires a unique <paramref name="elementId"/> to avoid conflicts.
     /// </summary>
-    public ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", bool percentPosition = true,
+    public ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string? columnWidthSelector = null, bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default);
 
     ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default);
