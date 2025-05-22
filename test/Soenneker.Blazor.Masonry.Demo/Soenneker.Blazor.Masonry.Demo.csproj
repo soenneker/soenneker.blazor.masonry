@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
       <TargetFramework>net9.0</TargetFramework>
       <Nullable>enable</Nullable>
       <Platforms>AnyCPU</Platforms>
       <NoWarn>$(NoWarn);1591</NoWarn>
-  </PropertyGroup>
+  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild></PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="NewFolder\**" />
