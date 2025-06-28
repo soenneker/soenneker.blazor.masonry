@@ -39,6 +39,6 @@
 
         <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.1473" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.6" />
-        <PackageReference Include="Soenneker.Extensions.String" Version="3.0.535" />
+        <PackageReference Include="Soenneker.Extensions.String" Version="3.0.537" />
     </ItemGroup>
 </Project>
