@@ -10,7 +10,7 @@ using Soenneker.Utils.AsyncSingleton;
 namespace Soenneker.Blazor.Masonry;
 
 ///<inheritdoc cref="IMasonryInterop"/>
-public class MasonryInterop : IMasonryInterop
+public sealed class MasonryInterop : IMasonryInterop
 {
     private readonly IJSRuntime _jsRuntime;
     private readonly IResourceLoader _resourceLoader;
@@ -88,8 +88,6 @@ public class MasonryInterop : IMasonryInterop
 
     public async ValueTask DisposeAsync()
     {
-        GC.SuppressFinalize(this);
-
         await _resourceLoader.DisposeModule(_modulePath).NoSync();
 
         await _scriptInitializer.DisposeAsync().NoSync();
