@@ -18,7 +18,7 @@
       <PackageReference Include="Blazorise.Bootstrap" Version="1.7.7" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.6" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.6" PrivateAssets="all" />
-      <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="3.0.171" />
+      <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="3.0.172" />
       <PackageReference Include="Soenneker.Utils.AutoBogus" Version="3.0.784" />
   </ItemGroup>
 
