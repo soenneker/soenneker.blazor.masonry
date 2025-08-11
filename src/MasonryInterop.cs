@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.Masonry.Abstract;
@@ -78,7 +77,7 @@ public sealed class MasonryInterop : IMasonryInterop
     {
         await _scriptInitializer.Init(cancellationToken).NoSync();
 
-        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.layout", cancellationToken, elementId);
+        await _jsRuntime.InvokeVoidAsync($"{_moduleName}.layout", cancellationToken, elementId).NoSync();
     }
 
     public ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)

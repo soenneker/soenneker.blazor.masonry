@@ -1,22 +1,24 @@
 @using System.Threading
 @using Soenneker.Blazor.Masonry.Abstract
-@using Soenneker.Extensions.Task
 @using Soenneker.Extensions.ValueTask
 @using Soenneker.Extensions.String
+@using Soenneker.Extensions.CancellationTokens
 
 @inject IMasonryInterop MasonryInterop
 
+@inherits Soenneker.Quark.Components.Cancellable.CancellableComponent
 @implements IMasonry
 
-<div id="@_elementId" @attributes="Attributes">
+<div id="@_elementId" @attributes="Attributes" >
     @if (HasSizer)
     {
-        <div class="@($"{_sizerSelectorClass} {SizerClass}".Trim())"></div>
+        <div class="@($"{_sizerSelectorClass} {SizerClass}".Trim())" ></div>
     }
     @ChildContent
 </div>
 
 @code {
+
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object?>? Attributes { get; set; }
 
@@ -31,11 +33,10 @@
 
     private string _elementId = null!;
 
-    private readonly string _sizerSelectorClass = "masonry-sizer";
-    private readonly CancellationTokenSource _cTs = new();
+    private const string _sizerSelectorClass = "masonry-sizer";
 
-    string SizerSelector => "." + _sizerSelectorClass;
-    bool HasSizer => !string.IsNullOrEmpty(SizerClass);
+    static string SizerSelector => "." + _sizerSelectorClass;
+    private bool HasSizer => SizerClass.HasContent();
 
     protected override void OnParametersSet()
     {
@@ -53,29 +54,28 @@
     {
         if (firstRender && AutoRender)
         {
-            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: _cTs.Token).NoSync();
-            await MasonryInterop.CreateObserver(_elementId, _cTs.Token).NoSync();
+            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: CancellationToken).NoSync();
+            await MasonryInterop.CreateObserver(_elementId, CancellationToken).NoSync();
         }
     }
 
     public async ValueTask Init(CancellationToken cancellationToken = default)
     {
-        using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cTs.Token);
-        await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linkedCts.Token).NoSync();
-        await MasonryInterop.CreateObserver(_elementId, linkedCts.Token).NoSync();
+        CancellationToken linked = CancellationToken.Link(cancellationToken, out CancellationTokenSource? cts);
+
+        using (cts)
+        {
+            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linked).NoSync();
+            await MasonryInterop.CreateObserver(_elementId, linked).NoSync();
+        }
     }
 
     public async ValueTask Layout(CancellationToken cancellationToken = default)
     {
-        using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cTs.Token);
-        await MasonryInterop.Layout(_elementId, cancellationToken: linkedCts.Token).NoSync();
+        CancellationToken linked = CancellationToken.Link(cancellationToken, out CancellationTokenSource? cts);
+
+        using (cts)
+            await MasonryInterop.Layout(_elementId, cancellationToken: linked).NoSync();
     }
 
-    public async ValueTask DisposeAsync()
-    {
-        GC.SuppressFinalize(this);
-
-        await MasonryInterop.Destroy(_elementId).NoSync();
-        await _cTs.CancelAsync().NoSync();
-    }
 }
