@@ -40,7 +40,7 @@
         <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.1491" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.8" />
         <PackageReference Include="Soenneker.Extensions.String" Version="3.0.548" />
-        <PackageReference Include="Soenneker.Extensions.CancellationTokens" Version="3.0.1" />
+        <PackageReference Include="Soenneker.Extensions.CancellationTokens" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Components.Cancellable" Version="3.0.2" />
     </ItemGroup>
 </Project>
