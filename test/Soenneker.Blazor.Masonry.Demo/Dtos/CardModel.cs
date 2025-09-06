@@ -1,4 +1,4 @@
-﻿namespace Soenneker.Blazor.Masonry.Demo.Dtos;
+namespace Soenneker.Blazor.Masonry.Demo.Dtos;
 
 public class CardModel
 {

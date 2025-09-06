@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Soenneker.Blazor.Masonry.Demo.Dtos;
 using Soenneker.Utils.AutoBogus;

@@ -54,8 +54,8 @@
     {
         if (firstRender && AutoRender)
         {
-            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: CancellationToken).NoSync();
-            await MasonryInterop.CreateObserver(_elementId, CancellationToken).NoSync();
+            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: CancellationToken);
+            await MasonryInterop.CreateObserver(_elementId, CancellationToken);
         }
     }
 
@@ -65,8 +65,8 @@
 
         using (cts)
         {
-            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linked).NoSync();
-            await MasonryInterop.CreateObserver(_elementId, linked).NoSync();
+            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linked);
+            await MasonryInterop.CreateObserver(_elementId, linked);
         }
     }
 
@@ -75,7 +75,7 @@
         CancellationToken linked = CancellationToken.Link(cancellationToken, out CancellationTokenSource? cts);
 
         using (cts)
-            await MasonryInterop.Layout(_elementId, cancellationToken: linked).NoSync();
+            await MasonryInterop.Layout(_elementId, cancellationToken: linked);
     }
 
 }
