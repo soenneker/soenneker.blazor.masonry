@@ -67,7 +67,7 @@ public class Program
             builder.ClearProviders();
             builder.AddFilter("Microsoft.AspNetCore.Components.RenderTree.*", LogLevel.None);
 
-            builder.AddSerilog(dispose: true);
+            builder.AddSerilog(dispose: false);
         });
     }
 
