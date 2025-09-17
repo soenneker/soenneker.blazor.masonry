@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-      <PackageReference Include="Blazorise.Bootstrap" Version="1.8.2" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.9" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.9" PrivateAssets="all" />
       <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="3.0.193" />

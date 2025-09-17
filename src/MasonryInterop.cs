@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.Masonry.Abstract;
 using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
-using Soenneker.Extensions.ValueTask;
 using Soenneker.Utils.AsyncSingleton;
 
 namespace Soenneker.Blazor.Masonry;

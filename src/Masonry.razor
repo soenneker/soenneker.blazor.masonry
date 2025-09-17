@@ -1,12 +1,11 @@
 @using System.Threading
 @using Soenneker.Blazor.Masonry.Abstract
-@using Soenneker.Extensions.ValueTask
 @using Soenneker.Extensions.String
 @using Soenneker.Extensions.CancellationTokens
 
 @inject IMasonryInterop MasonryInterop
 
-@inherits Soenneker.Quark.Components.Cancellable.CancellableComponent
+@inherits Soenneker.Quark.Components.Cancellable.CancellableElement
 @implements IMasonry
 
 <div id="@_elementId" @attributes="Attributes" >
@@ -18,12 +17,6 @@
 </div>
 
 @code {
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object?>? Attributes { get; set; }
-
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
     public bool AutoRender { get; set; } = true;

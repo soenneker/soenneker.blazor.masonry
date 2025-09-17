@@ -1,4 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFrameworks>net9.0</TargetFrameworks>
@@ -30,17 +32,16 @@
         <LangVersion>latest</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild></PropertyGroup>
-    
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
         <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.1503" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.9" />
-        <PackageReference Include="Soenneker.Extensions.String" Version="3.0.557" />
         <PackageReference Include="Soenneker.Extensions.CancellationTokens" Version="3.0.3" />
-        <PackageReference Include="Soenneker.Quark.Components.Cancellable" Version="3.0.17" />
+        <PackageReference Include="Soenneker.Quark.Components.Cancellable" Version="3.0.18" />
     </ItemGroup>
 </Project>
