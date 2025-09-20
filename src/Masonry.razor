@@ -5,10 +5,10 @@
 
 @inject IMasonryInterop MasonryInterop
 
-@inherits Soenneker.Quark.Components.Cancellable.CancellableElement
+@inherits Soenneker.Quark.Components.Core.Cancellable.CoreCancellableElement
 @implements IMasonry
 
-<div id="@_elementId" @attributes="Attributes" >
+<div id="@Id" @attributes="Attributes" >
     @if (HasSizer)
     {
         <div class="@($"{_sizerSelectorClass} {SizerClass}".Trim())" ></div>
@@ -23,9 +23,7 @@
 
     [Parameter]
     public string? SizerClass { get; set; }
-
-    private string _elementId = null!;
-
+    
     private const string _sizerSelectorClass = "masonry-sizer";
 
     static string SizerSelector => "." + _sizerSelectorClass;
@@ -35,11 +33,11 @@
     {
         if (Attributes != null && Attributes.TryGetValue("id", out object? idValue) && idValue is string idStr && idStr.HasContent())
         {
-            _elementId = idStr;
+            Id = idStr;
         }
         else
         {
-            _elementId = $"masonry-{Guid.NewGuid()}";
+            Id = $"masonry-{Guid.NewGuid()}";
         }
     }
 
@@ -47,8 +45,8 @@
     {
         if (firstRender && AutoRender)
         {
-            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: CancellationToken);
-            await MasonryInterop.CreateObserver(_elementId, CancellationToken);
+            await MasonryInterop.Init(Id!, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: CancellationToken);
+            await MasonryInterop.CreateObserver(Id!, CancellationToken);
         }
     }
 
@@ -58,8 +56,8 @@
 
         using (cts)
         {
-            await MasonryInterop.Init(_elementId, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linked);
-            await MasonryInterop.CreateObserver(_elementId, linked);
+            await MasonryInterop.Init(Id!, columnWidthSelector: HasSizer ? SizerSelector : null, cancellationToken: linked);
+            await MasonryInterop.CreateObserver(Id!, linked);
         }
     }
 
@@ -68,7 +66,7 @@
         CancellationToken linked = CancellationToken.Link(cancellationToken, out CancellationTokenSource? cts);
 
         using (cts)
-            await MasonryInterop.Layout(_elementId, cancellationToken: linked);
+            await MasonryInterop.Layout(Id!, cancellationToken: linked);
     }
 
 }

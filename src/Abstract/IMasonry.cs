@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Soenneker.Quark.Components.Abstract;
+using Soenneker.Quark.Components.Core.Abstract;
 
 namespace Soenneker.Blazor.Masonry.Abstract;
 
 /// <summary>
 /// Defines the contract for a Masonry Blazor component interop wrapper.
 /// </summary>
-public interface IMasonry : IElement
+public interface IMasonry : ICoreElement
 {
     /// <summary>
     /// Gets or sets a value indicating whether the component should automatically initialize Masonry on first render.
