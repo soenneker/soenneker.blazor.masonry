@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Soenneker.Quark.Components.Core.Abstract;
+using Soenneker.Quark;
 
 namespace Soenneker.Blazor.Masonry.Abstract;
 
