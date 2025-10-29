@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0</TargetFrameworks>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Platforms>AnyCPU</Platforms>
         <NoWarn>$(NoWarn);1591</NoWarn>
@@ -11,7 +11,7 @@
 
     <PropertyGroup>
         <Description>A lightweight, responsive **Blazor** component for Masonry (the cascading grid layout library) — perfect for image grids, cards, and dynamic content.</Description>
-        <Version Condition="'$(BUILD_VERSION)' == ''">3.0.0</Version>
+        <Version Condition="'$(BUILD_VERSION)' == ''">4.0.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Blazor.Masonry</AssemblyName>
         <PackageId>Soenneker.Blazor.Masonry</PackageId>
