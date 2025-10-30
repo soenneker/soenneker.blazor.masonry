@@ -24,7 +24,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Utils.Test" Version="3.0.294" />
+        <PackageReference Include="Soenneker.Utils.Test" Version="4.0.295" />
         <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="3.0.2012" />
         <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="3.0.298" />
         <PackageReference Include="xUnit.v3" Version="3.1.0" />
