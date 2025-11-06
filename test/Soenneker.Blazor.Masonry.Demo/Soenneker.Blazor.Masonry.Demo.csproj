@@ -18,7 +18,7 @@
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0-rc.2.25502.107" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0-rc.2.25502.107" PrivateAssets="all" />
       <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.204" />
-      <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.811" />
+      <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.812" />
   </ItemGroup>
 
   <ItemGroup>
