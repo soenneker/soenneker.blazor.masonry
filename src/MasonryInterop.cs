@@ -1,9 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using Soenneker.Asyncs.Initializers;
 using Soenneker.Blazor.Masonry.Abstract;
 using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
-using Soenneker.Asyncs.Initializers;
+using Soenneker.Extensions.CancellationTokens;
+using Soenneker.Utils.CancellationScopes;
 
 namespace Soenneker.Blazor.Masonry;
 
@@ -17,6 +19,8 @@ public sealed class MasonryInterop : IMasonryInterop
 
     private const string _modulePath = "Soenneker.Blazor.Masonry/js/masonryinterop.js";
     private const string _moduleName = "MasonryInterop";
+
+    private readonly CancellationScope _cancellationScope = new();
 
     public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
     {
@@ -44,37 +48,55 @@ public sealed class MasonryInterop : IMasonryInterop
 
     public ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        return _scriptInitializer.Init(useCdn, cancellationToken);
+        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+
+        using (source)
+            return _scriptInitializer.Init(useCdn, linked);
     }
 
     public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string? columnWidthSelector = null,
         bool percentPosition = true, float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        await _scriptInitializer.Init(useCdn, cancellationToken);
+        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
-        containerSelector ??= $"#{elementId}";
+        using (source)
+        {
+            await _scriptInitializer.Init(useCdn, linked);
 
-        var transitionDurationStr = $"{transitionDurationSecs}s";
+            containerSelector ??= $"#{elementId}";
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", cancellationToken, elementId, containerSelector, itemSelector, columnWidthSelector,
-            percentPosition, transitionDurationStr);
+            var transitionDurationStr = $"{transitionDurationSecs}s";
+
+            await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", linked, elementId, containerSelector, itemSelector, columnWidthSelector,
+                percentPosition, transitionDurationStr);
+        }
     }
 
     public ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default)
     {
-        return _jsRuntime.InvokeVoidAsync("MasonryInterop.createObserver", cancellationToken, elementId);
+        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+
+        using (source)
+            return _jsRuntime.InvokeVoidAsync("MasonryInterop.createObserver", linked, elementId);
     }
 
     public async ValueTask Layout(string elementId, CancellationToken cancellationToken = default)
     {
-        await _scriptInitializer.Init(true, cancellationToken);
+        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
-        await _jsRuntime.InvokeVoidAsync("MasonryInterop.layout", cancellationToken, elementId);
+        using (source)
+        {
+            await _scriptInitializer.Init(true, linked);
+            await _jsRuntime.InvokeVoidAsync("MasonryInterop.layout", linked, elementId);
+        }
     }
 
     public ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)
     {
-        return _jsRuntime.InvokeVoidAsync("MasonryInterop.destroy", cancellationToken, elementId);
+        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+
+        using (source)
+            return _jsRuntime.InvokeVoidAsync("MasonryInterop.destroy", linked, elementId);
     }
 
     public async ValueTask DisposeAsync()
@@ -82,5 +104,6 @@ public sealed class MasonryInterop : IMasonryInterop
         await _resourceLoader.DisposeModule(_modulePath);
 
         await _scriptInitializer.DisposeAsync();
+        await _cancellationScope.DisposeAsync();
     }
 }
