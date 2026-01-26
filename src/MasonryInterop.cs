@@ -46,12 +46,12 @@ public sealed class MasonryInterop : IMasonryInterop
         await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleName, 100, token);
     }
 
-    public ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
+    public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
     {
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
         using (source)
-            return _scriptInitializer.Init(useCdn, linked);
+            await _scriptInitializer.Init(useCdn, linked);
     }
 
     public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string? columnWidthSelector = null,
@@ -72,12 +72,12 @@ public sealed class MasonryInterop : IMasonryInterop
         }
     }
 
-    public ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default)
+    public async ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default)
     {
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
         using (source)
-            return _jsRuntime.InvokeVoidAsync("MasonryInterop.createObserver", linked, elementId);
+            await _jsRuntime.InvokeVoidAsync("MasonryInterop.createObserver", linked, elementId);
     }
 
     public async ValueTask Layout(string elementId, CancellationToken cancellationToken = default)
@@ -91,12 +91,12 @@ public sealed class MasonryInterop : IMasonryInterop
         }
     }
 
-    public ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)
+    public async ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)
     {
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
         using (source)
-            return _jsRuntime.InvokeVoidAsync("MasonryInterop.destroy", linked, elementId);
+            await _jsRuntime.InvokeVoidAsync("MasonryInterop.destroy", linked, elementId);
     }
 
     public async ValueTask DisposeAsync()
