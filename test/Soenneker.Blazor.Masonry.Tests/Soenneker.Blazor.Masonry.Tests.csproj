@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup><PackageReference Include="Soenneker.Utils.Test" Version="4.0.303" />
-        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="4.0.2196" />
+        <PackageReference Include="Soenneker.Tests.FixturedUnit" Version="4.0.2197" />
         <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="4.0.311" />
         <PackageReference Include="xUnit.v3" Version="3.2.2" />
     </ItemGroup>
