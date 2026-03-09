@@ -1,11 +1,12 @@
-﻿[![](https://img.shields.io/nuget/v/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
+[![](https://img.shields.io/nuget/v/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.masonry/publish-package.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.masonry/actions/workflows/publish-package.yml)
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.Masonry.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.Masonry/)
+[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.masonry/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.masonry/actions/workflows/codeql.yml)
 
-# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Blazor.Masonry 🧱
-### A lightweight, responsive **Blazor** component for Masonry (the cascading grid layout library) — perfect for image grids, cards, and dynamic content.
+# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Blazor.Masonry ??
+### A lightweight, responsive **Blazor** component for Masonry (the cascading grid layout library) � perfect for image grids, cards, and dynamic content.
 
-## ✨ Features
+## ? Features
 
 - Fully compatible with Bootstrap grid classes
 - Script auto-loading (CDN or embedded)
@@ -29,7 +30,7 @@ public static async Task Main(string[] args)
 }
 ```
 
-## 🧩 Components
+## ?? Components
 
 ### `Masonry`
 
@@ -43,8 +44,8 @@ Wraps a group of items in a Masonry layout.
 
 **Parameters:**
 
-- `AutoRender` – Automatically initializes layout after render
-- `SizerClass` – Automatically adds a sizer with the given class(es). Used by Masonry to determine width of a single column.
+- `AutoRender` � Automatically initializes layout after render
+- `SizerClass` � Automatically adds a sizer with the given class(es). Used by Masonry to determine width of a single column.
 
 ### `MasonryItem`
 
@@ -60,7 +61,7 @@ Automatically appends `masonry-item` to the `class` attribute.
 
 ---
 
-## 🚀 Example
+## ?? Example
 
 ```razor
 <Masonry AutoRender="false" SizerClass="col-sm-1" @ref="_masonry" class="row">
@@ -95,13 +96,13 @@ Automatically appends `masonry-item` to the `class` attribute.
 
 ---
 
-## 🔄 Initialization
+## ?? Initialization
 
 - If `AutoRender` is `true`, Masonry initializes on first render.
 - If `false`, call `Init()` manually when ready (e.g., after images load).
-- **No disposal needed** – cleanup is handled automatically when navigating away.
+- **No disposal needed** � cleanup is handled automatically when navigating away.
 
-## 🧠 Manual Interop Usage
+## ?? Manual Interop Usage
 
 If you want full control without using the `Masonry` component, you can use the provided `IMasonryInterop` service directly.
 
@@ -159,4 +160,4 @@ await MasonryInterop.CreateObserver("gallery");
 await MasonryInterop.Destroy("gallery");
 ```
 
-> 💡 **Note:** The `Masonry` component handles these automatically. Use manual interop when building custom wrappers or integrations.
+> ?? **Note:** The `Masonry` component handles these automatically. Use manual interop when building custom wrappers or integrations.
