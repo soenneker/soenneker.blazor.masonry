@@ -1,0 +1,58 @@
+name: deploy-demo
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  PipelineEnvironment: true
+  NUGET_XMLDOC_MODE: skip
+
+jobs:
+  deploy-demo:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+          workloads: wasm-tools
+
+      - name: Restore demo
+        run: dotnet restore test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --verbosity minimal
+
+      - name: Publish Blazor WebAssembly Demo
+        run: dotnet publish test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj -c Release
+
+      - name: Set Base Href for GitHub Pages
+        run: |
+          cd test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot
+          sed -i 's|%BASE_URL%|/${{ github.event.repository.name }}/|g' index.html || exit 1
+
+      - name: Add .nojekyll
+        run: touch test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot/.nojekyll
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
