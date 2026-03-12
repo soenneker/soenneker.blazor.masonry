@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
       <TargetFramework>net10.0</TargetFramework>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry.csproj" />
+    <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry\Soenneker.Blazor.Masonry.csproj" />
   </ItemGroup>
 
 </Project>
