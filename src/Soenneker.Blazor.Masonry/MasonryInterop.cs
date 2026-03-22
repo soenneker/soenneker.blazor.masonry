@@ -43,7 +43,7 @@ public sealed class MasonryInterop : IMasonryInterop
                 cancellationToken: token);
         }
 
-        await _resourceLoader.ImportModuleAndWaitUntilAvailable(_modulePath, _moduleName, 100, token);
+        await _resourceLoader.ImportModule(_modulePath, token);
     }
 
     public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)

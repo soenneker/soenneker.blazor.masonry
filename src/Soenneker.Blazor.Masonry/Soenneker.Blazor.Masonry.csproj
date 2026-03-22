@@ -45,8 +45,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="4.0.1629" />
+        <PackageReference Include="Soenneker.Asyncs.Initializers" Version="4.0.45" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="4.0.1630" />
         <PackageReference Include="Soenneker.Extensions.String" Version="4.0.664" />
         <PackageReference Include="Soenneker.Quark.Components.Core.Cancellable" Version="4.0.60" />
     </ItemGroup>
 </Project>
+
