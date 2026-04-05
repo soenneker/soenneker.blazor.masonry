@@ -1,0 +1,38 @@
+@inherits LayoutComponentBase
+@using Target = Soenneker.Quark.Target
+
+<Container>
+    <Div Space="Space.Y.Is6" Padding="Padding.Is6.OnY">
+        <Div Display="Display.Flex"
+             Flex="Flex.Wrap"
+             AlignUtility="Align.ItemsCenter.JustifyBetween"
+             Gap="Gap.Is3"
+             Border="Border.Is1.FromBottom"
+             BorderColor="BorderColor.Border"
+             Padding="Padding.Is4.FromBottom">
+            <H1 Margin="Margin.Is0" TextSize="TextSize.TwoXl" FontWeight="FontWeight.Semibold">
+                @DemoTitle
+            </H1>
+
+            <Anchor To="@RepositoryUrl"
+                    Target="Target.Blank"
+                    Rel="noreferrer"
+                    Display="Display.InlineFlex"
+                    AlignUtility="Align.ItemsCenter"
+                    Rounded="Rounded.Lg"
+                    BackgroundColor="BackgroundColor.Primary"
+                    Padding='Padding.Token("4").OnX.Token("2").OnY'
+                    FontWeight="FontWeight.Medium"
+                    TextColor="TextColor.PrimaryForeground">
+                GitHub
+            </Anchor>
+        </Div>
+
+        @Body
+    </Div>
+</Container>
+
+@code {
+    private static string DemoTitle => typeof(MainLayout).Assembly.GetName().Name ?? "Soenneker Demo";
+    private const string RepositoryUrl = "https://github.com/soenneker/soenneker.blazor.masonry";
+}

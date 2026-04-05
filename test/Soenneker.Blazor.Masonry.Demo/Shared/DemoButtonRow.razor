@@ -1,0 +1,8 @@
+<Div Display="Display.Flex" Flex="Flex.Wrap" Gap="Gap.Is3">
+    @ChildContent
+</Div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

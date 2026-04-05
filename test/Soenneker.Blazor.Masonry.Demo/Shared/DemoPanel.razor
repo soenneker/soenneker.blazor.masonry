@@ -1,0 +1,31 @@
+<Card>
+    <CardHeader>
+        <Div Space="Space.Y.Is1">
+            <H3 Margin="Margin.Is0">@Title</H3>
+
+            @if (!string.IsNullOrWhiteSpace(Description))
+            {
+                <Paragraph Margin="Margin.Is0" TextSize="TextSize.Sm" TextColor="TextColor.MutedForeground">
+                    @Description
+                </Paragraph>
+            }
+        </Div>
+    </CardHeader>
+
+    <CardBody>
+        <Div Space="Space.Y.Is4">
+            @ChildContent
+        </Div>
+    </CardBody>
+</Card>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "";
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
