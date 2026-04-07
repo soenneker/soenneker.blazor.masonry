@@ -1,8 +1,10 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Soenneker.Asyncs.Initializers;
 using Soenneker.Blazor.Masonry.Abstract;
+using Soenneker.Blazor.Utils.ModuleImport.Abstract;
 using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
 using Soenneker.Extensions.CancellationTokens;
 using Soenneker.Utils.CancellationScopes;
@@ -12,38 +14,48 @@ namespace Soenneker.Blazor.Masonry;
 ///<inheritdoc cref="IMasonryInterop"/>
 public sealed class MasonryInterop : IMasonryInterop
 {
-    private readonly IJSRuntime _jsRuntime;
+    private const string _modulePath = "/_content/Soenneker.Blazor.Masonry/js/masonryinterop.js";
+
     private readonly IResourceLoader _resourceLoader;
+    private readonly IModuleImportUtil _moduleImportUtil;
 
     private readonly AsyncInitializer<bool> _scriptInitializer;
 
-    private const string _modulePath = "Soenneker.Blazor.Masonry/js/masonryinterop.js";
-    private const string _moduleName = "MasonryInterop";
-
     private readonly CancellationScope _cancellationScope = new();
 
-    public MasonryInterop(IJSRuntime jSRuntime, IResourceLoader resourceLoader)
+    public MasonryInterop(IResourceLoader resourceLoader, IModuleImportUtil moduleImportUtil)
     {
-        _jsRuntime = jSRuntime;
         _resourceLoader = resourceLoader;
+        _moduleImportUtil = moduleImportUtil;
 
         _scriptInitializer = new AsyncInitializer<bool>(Initialize);
+    }
+
+    private static string NormalizeContentUri(string uri)
+    {
+        if (string.IsNullOrEmpty(uri) || uri.Contains("://", StringComparison.Ordinal))
+            return uri;
+
+        return uri[0] == '/' ? uri : "/" + uri;
     }
 
     private async ValueTask Initialize(bool useCdn, CancellationToken token)
     {
         if (useCdn)
         {
-            await _resourceLoader.LoadScriptAndWaitForVariable("https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js", "Masonry",
-                "sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=", cancellationToken: token);
+            await _resourceLoader.LoadScriptAndWaitForVariable(
+                "https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js",
+                "Masonry",
+                "sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=",
+                cancellationToken: token);
         }
         else
         {
-            await _resourceLoader.LoadScriptAndWaitForVariable("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js", "Masonry",
+            await _resourceLoader.LoadScriptAndWaitForVariable(NormalizeContentUri("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js"), "Masonry",
                 cancellationToken: token);
         }
 
-        await _resourceLoader.ImportModule(_modulePath, token);
+        _ = await _moduleImportUtil.GetContentModuleReference(_modulePath, token);
     }
 
     public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
@@ -67,8 +79,9 @@ public sealed class MasonryInterop : IMasonryInterop
 
             var transitionDurationStr = $"{transitionDurationSecs}s";
 
-            await _jsRuntime.InvokeVoidAsync("MasonryInterop.init", linked, elementId, containerSelector, itemSelector, columnWidthSelector,
-                percentPosition, transitionDurationStr);
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidAsync("init", linked, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition,
+                transitionDurationStr);
         }
     }
 
@@ -77,7 +90,10 @@ public sealed class MasonryInterop : IMasonryInterop
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
         using (source)
-            await _jsRuntime.InvokeVoidAsync("MasonryInterop.createObserver", linked, elementId);
+        {
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidAsync("createObserver", linked, elementId);
+        }
     }
 
     public async ValueTask Layout(string elementId, CancellationToken cancellationToken = default)
@@ -87,7 +103,8 @@ public sealed class MasonryInterop : IMasonryInterop
         using (source)
         {
             await _scriptInitializer.Init(true, linked);
-            await _jsRuntime.InvokeVoidAsync("MasonryInterop.layout", linked, elementId);
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidAsync("layout", linked, elementId);
         }
     }
 
@@ -96,12 +113,15 @@ public sealed class MasonryInterop : IMasonryInterop
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
 
         using (source)
-            await _jsRuntime.InvokeVoidAsync("MasonryInterop.destroy", linked, elementId);
+        {
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidAsync("destroy", linked, elementId);
+        }
     }
 
     public async ValueTask DisposeAsync()
     {
-        await _resourceLoader.DisposeModule(_modulePath);
+        await _moduleImportUtil.DisposeContentModule(_modulePath);
 
         await _scriptInitializer.DisposeAsync();
         await _cancellationScope.DisposeAsync();
