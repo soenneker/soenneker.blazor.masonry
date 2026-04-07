@@ -60,7 +60,7 @@ public sealed class MasonryInterop : IMasonryInterop
 
     public async ValueTask Warmup(bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+        CancellationToken linked = _cancellationScope.CancellationToken.Link(cancellationToken, out CancellationTokenSource? source);
 
         using (source)
             await _scriptInitializer.Init(useCdn, linked);
@@ -69,7 +69,7 @@ public sealed class MasonryInterop : IMasonryInterop
     public async ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string? columnWidthSelector = null,
         bool percentPosition = true, float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default)
     {
-        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+        CancellationToken linked = _cancellationScope.CancellationToken.Link(cancellationToken, out CancellationTokenSource? source);
 
         using (source)
         {
@@ -87,7 +87,7 @@ public sealed class MasonryInterop : IMasonryInterop
 
     public async ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default)
     {
-        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+        CancellationToken linked = _cancellationScope.CancellationToken.Link(cancellationToken, out CancellationTokenSource? source);
 
         using (source)
         {
@@ -98,7 +98,7 @@ public sealed class MasonryInterop : IMasonryInterop
 
     public async ValueTask Layout(string elementId, CancellationToken cancellationToken = default)
     {
-        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+        CancellationToken linked = _cancellationScope.CancellationToken.Link(cancellationToken, out CancellationTokenSource? source);
 
         using (source)
         {
@@ -110,7 +110,7 @@ public sealed class MasonryInterop : IMasonryInterop
 
     public async ValueTask Destroy(string elementId, CancellationToken cancellationToken = default)
     {
-        var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
+        CancellationToken linked = _cancellationScope.CancellationToken.Link(cancellationToken, out CancellationTokenSource? source);
 
         using (source)
         {
