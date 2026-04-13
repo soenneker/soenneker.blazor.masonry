@@ -2,6 +2,7 @@
 @using Soenneker.Blazor.Masonry.Abstract
 @using Soenneker.Extensions.String
 @using Soenneker.Extensions.CancellationTokens
+@using Soenneker.Blazor.Utils.Ids
 
 @inject IMasonryInterop MasonryInterop
 
@@ -38,7 +39,7 @@
         }
         else
         {
-            Id = $"masonry-{Guid.NewGuid()}";
+            Id = BlazorIdGenerator.New("masonry");
         }
     }
 
