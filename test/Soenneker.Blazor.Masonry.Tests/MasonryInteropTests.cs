@@ -1,21 +1,19 @@
 using Soenneker.Blazor.Masonry.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
-
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Blazor.Masonry.Tests;
 
-[Collection("Collection")]
-public class MasonryInteropTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class MasonryInteropTests : HostedUnitTest
 {
     private readonly IMasonryInterop _util;
 
-    public MasonryInteropTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public MasonryInteropTests(Host host) : base(host)
     {
         _util = Resolve<IMasonryInterop>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 

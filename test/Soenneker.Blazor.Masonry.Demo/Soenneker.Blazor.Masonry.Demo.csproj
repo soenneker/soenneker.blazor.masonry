@@ -1,29 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU</Platforms>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
 
-  <PropertyGroup>
-      <TargetFramework>net10.0</TargetFramework>
-      <Nullable>enable</Nullable>
-      <Platforms>AnyCPU</Platforms>
-      <NoWarn>$(NoWarn);1591</NoWarn>
-  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild></PropertyGroup>
+    <ItemGroup>
+        <Compile Remove="NewFolder\**" />
+        <Content Remove="NewFolder\**" />
+        <EmbeddedResource Remove="NewFolder\**" />
+        <None Remove="NewFolder\**" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <Content Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.7" PrivateAssets="all" />
+        <PackageReference Include="Soenneker.Blazor.Utils.Ids" Version="4.0.4" />
+        <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.308" />
+        <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.889" />
+    </ItemGroup>
 
-  <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.6" />
-      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.7" PrivateAssets="all" />
-      <PackageReference Include="Soenneker.Blazor.Utils.Ids" Version="4.0.4" />
-      <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.308" />
-      <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.889" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry\Soenneker.Blazor.Masonry.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Soenneker.Blazor.Masonry\Soenneker.Blazor.Masonry.csproj" />
+    </ItemGroup>
 </Project>

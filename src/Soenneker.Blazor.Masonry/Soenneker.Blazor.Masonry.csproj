@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
@@ -51,4 +48,3 @@
         <PackageReference Include="Soenneker.Quark.Components.Core.Cancellable" Version="4.0.66" />
     </ItemGroup>
 </Project>
-
