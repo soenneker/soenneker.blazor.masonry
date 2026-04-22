@@ -38,7 +38,7 @@ jobs:
         run: dotnet build test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --configuration Release --no-restore --verbosity minimal
 
       - name: Test
-        run: dotnet test test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --configuration Release --no-build --no-restore --verbosity minimal
+        run: dotnet test --project test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --configuration Release --no-build --no-restore --verbosity minimal
 
       - name: Pack
         run: dotnet pack src/Soenneker.Blazor.Masonry/Soenneker.Blazor.Masonry.csproj --configuration Release --no-build --no-restore --output . --verbosity minimal
