@@ -49,14 +49,14 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Restore tests
-        run: dotnet restore test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --verbosity minimal
+      - name: Restore
+        run: dotnet restore Soenneker.Blazor.Masonry.slnx --verbosity minimal
 
-      - name: Build tests
-        run: dotnet build test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --configuration Release --no-restore --verbosity minimal
+      - name: Build
+        run: dotnet build Soenneker.Blazor.Masonry.slnx --configuration Release --no-restore --verbosity minimal
 
       - name: Test
-        run: dotnet test --project test/Soenneker.Blazor.Masonry.Demo/Soenneker.Blazor.Masonry.Demo.csproj --configuration Release --no-build --no-restore --verbosity normal
+        run: dotnet test --project test/Soenneker.Blazor.Masonry.Tests/Soenneker.Blazor.Masonry.Tests.csproj --configuration Release --no-build --no-restore --verbosity normal
 
 
       - name: Restore library
