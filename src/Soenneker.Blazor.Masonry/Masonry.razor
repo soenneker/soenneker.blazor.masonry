@@ -6,11 +6,11 @@
 
 @inject IMasonryInterop MasonryInterop
 
-@inherits Soenneker.Quark.CoreCancellableElement
+@inherits Soenneker.Lepton.Suite.LeptonCancellableIdentifiableContentElement
 
 @implements IMasonry
 
-<div id="@Id" @attributes="Attributes" >
+<div @attributes="EffectiveAttributes" >
     @if (HasSizer)
     {
         <div class="@($"{_sizerSelectorClass} {SizerClass}".Trim())" ></div>
@@ -31,15 +31,16 @@
     static string SizerSelector => "." + _sizerSelectorClass;
     private bool HasSizer => SizerClass.HasContent();
 
+    public Masonry()
+    {
+        Id = BlazorIdGenerator.New("masonry");
+    }
+
     protected override void OnParametersSet()
     {
-        if (Attributes != null && Attributes.TryGetValue("id", out object? idValue) && idValue is string idStr && idStr.HasContent())
+        if (AdditionalAttributes != null && AdditionalAttributes.TryGetValue("id", out object? idValue) && idValue is string idStr && idStr.HasContent())
         {
             Id = idStr;
-        }
-        else
-        {
-            Id = BlazorIdGenerator.New("masonry");
         }
     }
 
