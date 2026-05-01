@@ -31,14 +31,6 @@ public sealed class MasonryInterop : IMasonryInterop
         _scriptInitializer = new AsyncInitializer<bool>(Initialize);
     }
 
-    private static string NormalizeContentUri(string uri)
-    {
-        if (string.IsNullOrEmpty(uri) || uri.Contains("://", StringComparison.Ordinal))
-            return uri;
-
-        return uri[0] == '/' ? uri : "/" + uri;
-    }
-
     private async ValueTask Initialize(bool useCdn, CancellationToken token)
     {
         if (useCdn)
@@ -51,7 +43,7 @@ public sealed class MasonryInterop : IMasonryInterop
         }
         else
         {
-            await _resourceLoader.LoadScriptAndWaitForVariable(NormalizeContentUri("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js"), "Masonry",
+            await _resourceLoader.LoadScriptAndWaitForVariable("_content/Soenneker.Blazor.Masonry/js/masonry.pkgd.min.js", "Masonry",
                 cancellationToken: token);
         }
 
