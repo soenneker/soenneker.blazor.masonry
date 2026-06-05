@@ -10,6 +10,11 @@ namespace Soenneker.Blazor.Masonry.Registrars;
 /// </summary>
 public static class MasonryRegistrar
 {
+    /// <summary>
+    /// Adds masonry interop as scoped.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddMasonryInteropAsScoped(this IServiceCollection services)
     {
         services.AddResourceLoaderAsScoped().TryAddScoped<IMasonryInterop, MasonryInterop>();

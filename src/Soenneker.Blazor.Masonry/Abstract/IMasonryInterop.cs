@@ -21,6 +21,12 @@ public interface IMasonryInterop : IAsyncDisposable
     public ValueTask Init(string elementId, string? containerSelector = null, string itemSelector = ".masonry-item", string? columnWidthSelector = null, bool percentPosition = true,
         float transitionDurationSecs = .2F, bool useCdn = true, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Creates observer.
+    /// </summary>
+    /// <param name="elementId">The element id.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     ValueTask CreateObserver(string elementId, CancellationToken cancellationToken = default);
 
     /// <summary>

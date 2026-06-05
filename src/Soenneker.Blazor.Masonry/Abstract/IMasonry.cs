@@ -22,5 +22,10 @@ public interface IMasonry : ILeptonIdentifiableContentElement
     /// <returns>A task representing the asynchronous operation.</returns>
     ValueTask Init(CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Executes the layout operation.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     ValueTask Layout(CancellationToken cancellationToken = default);
 }
