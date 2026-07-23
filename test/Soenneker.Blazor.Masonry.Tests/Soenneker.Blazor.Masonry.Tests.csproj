@@ -20,7 +20,7 @@
         <PackageReference Include="Soenneker.Utils.Test" Version="4.0.322" />
         <PackageReference Include="Soenneker.Tests.HostedUnit" Version="4.0.152" />
         <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="4.0.340" />
-        <PackageReference Include="TUnit" Version="1.61.29" />
+        <PackageReference Include="TUnit" Version="1.61.35" />
     </ItemGroup>
 
     <ItemGroup>
