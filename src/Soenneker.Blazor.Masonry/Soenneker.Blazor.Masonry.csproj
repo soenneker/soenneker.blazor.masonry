@@ -43,7 +43,7 @@
 
     <ItemGroup>
         <PackageReference Include="Soenneker.Asyncs.Initializers" Version="4.0.77" />
-        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="4.0.1709" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="4.0.1710" />
 <PackageReference Include="Soenneker.Lepton.Suite" Version="4.0.48" />
     </ItemGroup>
 </Project>
