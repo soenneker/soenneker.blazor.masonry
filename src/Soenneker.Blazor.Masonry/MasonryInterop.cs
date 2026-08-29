@@ -11,7 +11,7 @@ using Soenneker.Utils.CancellationScopes;
 
 namespace Soenneker.Blazor.Masonry;
 
-///<inheritdoc cref="IMasonryInterop"/>
+/// <inheritdoc cref="IMasonryInterop"/>
 public sealed class MasonryInterop : IMasonryInterop
 {
     private const string _modulePath = "_content/Soenneker.Blazor.Masonry/js/masonryinterop.js";
