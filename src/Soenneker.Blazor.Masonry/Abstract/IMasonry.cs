@@ -23,9 +23,9 @@ public interface IMasonry : ILeptonIdentifiableContentElement
     ValueTask Init(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Executes the layout operation.
+    /// Lays out masonry.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task that completes when the layout operation is complete.</returns>
     ValueTask Layout(CancellationToken cancellationToken = default);
 }
