@@ -19,7 +19,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.11" PrivateAssets="all" />
         <PackageReference Include="Soenneker.Blazor.Utils.Ids" Version="4.0.22" />
         <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.368" />
-        <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.929" />
+        <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.931" />
     </ItemGroup>
 
     <ItemGroup>
