@@ -18,7 +18,7 @@
 
     <ItemGroup>
         <PackageReference Include="Soenneker.Utils.Test" Version="4.0.327" />
-        <PackageReference Include="Soenneker.Tests.HostedUnit" Version="4.0.214" />
+        <PackageReference Include="Soenneker.Tests.HostedUnit" Version="4.0.215" />
         <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="4.0.347" />
         <PackageReference Include="TUnit" Version="1.65.68" />
     </ItemGroup>
