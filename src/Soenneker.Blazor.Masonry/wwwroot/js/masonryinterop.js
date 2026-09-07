@@ -49,7 +49,7 @@ export function createObserver(elementId) {
     masonryObservers.get(elementId)?.disconnect();
 
     const observer = new MutationObserver(mutations => {
-        const targetRemoved = mutations.some(mutation => Array.from(mutation.removedNodes).includes(target));
+        const targetRemoved = mutations.some(mutation => Array.prototype.includes.call(mutation.removedNodes, target));
 
         if (targetRemoved) {
             destroy(elementId);

@@ -15,7 +15,9 @@
 
     private static IReadOnlyDictionary<string, object?> MergeAttributesWithClass(Dictionary<string, object?>? attributes, string additionalClass)
     {
-        var merged = new Dictionary<string, object?>(attributes ?? new Dictionary<string, object?>());
+        var merged = attributes is null
+            ? new Dictionary<string, object?>(1)
+            : new Dictionary<string, object?>(attributes);
 
         if (merged.TryGetValue("class", out object? existingClassObj) && existingClassObj is string existingClass)
         {
