@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
+        <StaticWebAssetSpaFallbackEnabled>true</StaticWebAssetSpaFallbackEnabled>
         <Nullable>enable</Nullable>
         <Platforms>AnyCPU</Platforms>
         <NoWarn>$(NoWarn);1591</NoWarn>
@@ -15,10 +16,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.13" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.14" PrivateAssets="all" />
-        <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.438" />
-        <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.989" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0-rc.3.26522.148" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Gateway" Version="11.0.0-rc.3.26522.148" PrivateAssets="all" />
+        <PackageReference Include="Soenneker.Serilog.Sinks.Browser.Blazor" Version="4.0.439" />
+        <PackageReference Include="Soenneker.Utils.AutoBogus" Version="4.0.991" />
     </ItemGroup>
 
     <ItemGroup>

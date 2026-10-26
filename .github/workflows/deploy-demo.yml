@@ -31,7 +31,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 10.0.402
+          dotnet-version: 11.0.100-rc.3.26522.148
           workloads: wasm-tools
 
       - name: Restore demo
@@ -42,16 +42,16 @@ jobs:
 
       - name: Set Base Href for GitHub Pages
         run: |
-          cd test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot
+          cd test/Soenneker.Blazor.Masonry.Demo/bin/Release/net11.0/publish/wwwroot
           sed -i 's|%BASE_URL%|/${{ github.event.repository.name }}/|g' index.html || exit 1
 
       - name: Add .nojekyll
-        run: touch test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot/.nojekyll
+        run: touch test/Soenneker.Blazor.Masonry.Demo/bin/Release/net11.0/publish/wwwroot/.nojekyll
 
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: test/Soenneker.Blazor.Masonry.Demo/bin/Release/net10.0/publish/wwwroot
+          path: test/Soenneker.Blazor.Masonry.Demo/bin/Release/net11.0/publish/wwwroot
 
       - name: Deploy to GitHub Pages
         id: deployment

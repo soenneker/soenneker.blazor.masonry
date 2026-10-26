@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -17,10 +17,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Utils.Test" Version="4.0.341" />
-        <PackageReference Include="Soenneker.Tests.HostedUnit" Version="4.0.337" />
-        <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="4.0.363" />
-        <PackageReference Include="TUnit" Version="1.76.0" />
+        <PackageReference Include="Soenneker.Utils.Test" Version="4.0.342" />
+        <PackageReference Include="Soenneker.Tests.HostedUnit" Version="4.0.338" />
+        <PackageReference Include="Soenneker.Blazor.MockJsRuntime" Version="4.0.364" />
+        <PackageReference Include="TUnit" Version="1.76.28" />
     </ItemGroup>
 
     <ItemGroup>
