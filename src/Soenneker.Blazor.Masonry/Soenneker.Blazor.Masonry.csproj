@@ -47,4 +47,7 @@
         <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="11.0.1800" />
 <PackageReference Include="Soenneker.Lepton.Suite" Version="11.0.133" />
     </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Soenneker.Blazor.Extensions.IJSObjectReferences" Version="11.0.2" />
+    </ItemGroup>
 </Project>

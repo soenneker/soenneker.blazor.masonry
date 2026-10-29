@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using Soenneker.Blazor.Extensions.IJSObjectReferences;
 using Soenneker.Asyncs.Initializers;
 using Soenneker.Blazor.Masonry.Abstract;
 using Soenneker.Blazor.Utils.ModuleImport.Abstract;
@@ -65,22 +66,15 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            try
-            {
-                await _scriptInitializer.Init(useCdn, linked);
+            await _scriptInitializer.Init(useCdn, linked);
 
-                containerSelector ??= $"#{elementId}";
+            containerSelector ??= $"#{elementId}";
 
-                var transitionDurationStr = $"{transitionDurationSecs}s";
+            var transitionDurationStr = $"{transitionDurationSecs}s";
 
-                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-                await module.InvokeVoidAsync("init", linked, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition,
-                    transitionDurationStr);
-            }
-            catch (JSException exception)
-            {
-                throw new JSException($"JavaScript operation 'MasonryInterop.Init' failed: {exception.Message}", exception);
-            }
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidWithContextAsync("init", linked, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition,
+                transitionDurationStr);
         }
     }
 
@@ -90,15 +84,8 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            try
-            {
-                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-                await module.InvokeVoidAsync("createObserver", linked, elementId);
-            }
-            catch (JSException exception)
-            {
-                throw new JSException($"JavaScript operation 'MasonryInterop.CreateObserver' failed: {exception.Message}", exception);
-            }
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidWithContextAsync("createObserver", linked, elementId);
         }
     }
 
@@ -108,16 +95,9 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            try
-            {
-                await _scriptInitializer.Init(true, linked);
-                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-                await module.InvokeVoidAsync("layout", linked, elementId);
-            }
-            catch (JSException exception)
-            {
-                throw new JSException($"JavaScript operation 'MasonryInterop.Layout' failed: {exception.Message}", exception);
-            }
+            await _scriptInitializer.Init(true, linked);
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidWithContextAsync("layout", linked, elementId);
         }
     }
 
@@ -127,15 +107,8 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            try
-            {
-                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-                await module.InvokeVoidAsync("destroy", linked, elementId);
-            }
-            catch (JSException exception)
-            {
-                throw new JSException($"JavaScript operation 'MasonryInterop.Destroy' failed: {exception.Message}", exception);
-            }
+            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+            await module.InvokeVoidWithContextAsync("destroy", linked, elementId);
         }
     }
 
