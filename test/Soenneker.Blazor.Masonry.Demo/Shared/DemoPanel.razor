@@ -1,23 +1,15 @@
-<Card>
-    <CardHeader>
-        <Div Space="Space.Y.Is1">
-            <H3 Margin="Margin.Is0">@Title</H3>
-
-            @if (!string.IsNullOrWhiteSpace(Description))
-            {
-                <Paragraph Margin="Margin.Is0" TextSize="TextSize.Sm" TextColor="TextColor.MutedForeground">
-                    @Description
-                </Paragraph>
-            }
-        </Div>
-    </CardHeader>
-
-    <CardBody>
-        <Div Space="Space.Y.Is4">
-            @ChildContent
-        </Div>
-    </CardBody>
-</Card>
+<section class="card">
+    <div class="card-header">
+        <h3 class="h5 mb-0">@Title</h3>
+        @if (!string.IsNullOrWhiteSpace(Description))
+        {
+            <p class="small text-body-secondary mb-0 mt-1">@Description</p>
+        }
+    </div>
+    <div class="card-body d-flex flex-column gap-3">
+        @ChildContent
+    </div>
+</section>
 
 @code {
     [Parameter]

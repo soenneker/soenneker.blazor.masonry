@@ -65,15 +65,22 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            await _scriptInitializer.Init(useCdn, linked);
+            try
+            {
+                await _scriptInitializer.Init(useCdn, linked);
 
-            containerSelector ??= $"#{elementId}";
+                containerSelector ??= $"#{elementId}";
 
-            var transitionDurationStr = $"{transitionDurationSecs}s";
+                var transitionDurationStr = $"{transitionDurationSecs}s";
 
-            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-            await module.InvokeVoidAsync("init", linked, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition,
-                transitionDurationStr);
+                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+                await module.InvokeVoidAsync("init", linked, elementId, containerSelector, itemSelector, columnWidthSelector, percentPosition,
+                    transitionDurationStr);
+            }
+            catch (JSException exception)
+            {
+                throw new JSException($"JavaScript operation 'MasonryInterop.Init' failed: {exception.Message}", exception);
+            }
         }
     }
 
@@ -83,8 +90,15 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-            await module.InvokeVoidAsync("createObserver", linked, elementId);
+            try
+            {
+                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+                await module.InvokeVoidAsync("createObserver", linked, elementId);
+            }
+            catch (JSException exception)
+            {
+                throw new JSException($"JavaScript operation 'MasonryInterop.CreateObserver' failed: {exception.Message}", exception);
+            }
         }
     }
 
@@ -94,9 +108,16 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            await _scriptInitializer.Init(true, linked);
-            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-            await module.InvokeVoidAsync("layout", linked, elementId);
+            try
+            {
+                await _scriptInitializer.Init(true, linked);
+                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+                await module.InvokeVoidAsync("layout", linked, elementId);
+            }
+            catch (JSException exception)
+            {
+                throw new JSException($"JavaScript operation 'MasonryInterop.Layout' failed: {exception.Message}", exception);
+            }
         }
     }
 
@@ -106,8 +127,15 @@ public sealed class MasonryInterop : IMasonryInterop
 
         using (source)
         {
-            IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
-            await module.InvokeVoidAsync("destroy", linked, elementId);
+            try
+            {
+                IJSObjectReference module = await _moduleImportUtil.GetContentModuleReference(_modulePath, linked);
+                await module.InvokeVoidAsync("destroy", linked, elementId);
+            }
+            catch (JSException exception)
+            {
+                throw new JSException($"JavaScript operation 'MasonryInterop.Destroy' failed: {exception.Message}", exception);
+            }
         }
     }
 

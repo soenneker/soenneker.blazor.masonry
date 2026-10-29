@@ -1,35 +1,12 @@
 @inherits LayoutComponentBase
 
-<Container>
-    <Div Space="Space.Y.Is6" Padding="Padding.Is6.OnY">
-        <Div Display="Display.Flex"
-             Flex=@("flex-wrap")
-             AlignUtility="Align.ItemsCenter.JustifyBetween"
-             Gap="Gap.Is3"
-             Border="Border.Is1.FromBottom"
-             BorderColor="BorderColor.Border"
-             Padding="Padding.Is4.FromBottom">
-            <H1 Margin="Margin.Is0" TextSize="TextSize.TwoXl" FontWeight="FontWeight.Semibold">
-                @DemoTitle
-            </H1>
-
-            <Anchor To="@RepositoryUrl"
-                    Target="Target.Blank"
-                    Rel="noreferrer"
-                    Display="Display.InlineFlex"
-                    AlignUtility="Align.ItemsCenter"
-                    Rounded="Rounded.Lg"
-                    BackgroundColor="BackgroundColor.Primary"
-                    Padding='Padding.Token("4").OnX.Token("2").OnY'
-                    FontWeight="FontWeight.Medium"
-                    TextColor="TextColor.PrimaryForeground">
-                GitHub
-            </Anchor>
-        </Div>
-
-        @Body
-    </Div>
-</Container>
+<div class="container py-4">
+    <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 border-bottom pb-3 mb-4">
+        <h1 class="h3 mb-0">@DemoTitle</h1>
+        <a href="@RepositoryUrl" target="_blank" rel="noreferrer" class="btn btn-primary">GitHub</a>
+    </header>
+    @Body
+</div>
 
 @code {
     private static string DemoTitle => typeof(MainLayout).Assembly.GetName().Name ?? "Soenneker Demo";
