@@ -53,6 +53,6 @@
         <PackageReference Include="Soenneker.Blazor.Extensions.IJSObjectReferences" Version="11.0.5" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Soenneker.Gen.Web.Minifier" Version="11.0.56" PrivateAssets="all" />
+        <PackageReference Include="Soenneker.Gen.Web.Minifier" Version="11.0.57" PrivateAssets="all" />
     </ItemGroup>
 </Project>
