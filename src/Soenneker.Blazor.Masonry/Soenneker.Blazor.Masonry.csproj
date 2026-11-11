@@ -50,7 +50,7 @@
 <PackageReference Include="Soenneker.Lepton.Suite" Version="11.0.138" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Soenneker.Blazor.Extensions.IJSObjectReferences" Version="11.0.4" />
+        <PackageReference Include="Soenneker.Blazor.Extensions.IJSObjectReferences" Version="11.0.5" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Soenneker.Gen.Web.Minifier" Version="11.0.56" PrivateAssets="all" />
